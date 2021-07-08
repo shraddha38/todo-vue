@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import todo from '..views/todo.vue';
-import about from '..views/about.vue';
+import todo from '../views/todo.vue';
+import about from '../views/about.vue';
 
 Vue.use(VueRouter);
 
