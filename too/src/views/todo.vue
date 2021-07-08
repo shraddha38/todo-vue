@@ -8,7 +8,6 @@
       <v-subheader>Hangout notifications</v-subheader>
 
       <v-list-item-group
-        v-model="settings"
         multiple
       >
         <v-list-item>
