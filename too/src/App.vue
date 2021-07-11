@@ -66,7 +66,7 @@
 
     <v-main>
       <router-view></router-view>
-    </v-main>
+    </v-main>   
   </v-app>
 </template>
 
@@ -74,9 +74,9 @@
 export default {
   data: () => ({
     items: [
-      { title: "TODO", icon: "mdi-view-dashboard",to:' /'},
-
-      { title: "About", icon: "mdi-help-box" ,to:'/about'},
+      { title: "TODO", icon: "mdi-menu",to:'/'},
+      { title: "About", icon: "mdi-book" ,to:'/about'},
+      { title: "Calendar", icon:"mdi-label" ,to:'/calendar'},
     ],
 
     drawer: null,

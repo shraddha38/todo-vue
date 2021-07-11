@@ -1,79 +1,75 @@
 <template>
-    <div class="home pa-6">
-<v-list
-      subheader
-      two-line
-      flat
+  <div class="home pa-6">
+    <v-subheader>
+      <div id="app">
+        Last updated: {{ new Date().toLocaleString() }}
+      </div></v-subheader
     >
-      <v-subheader>Hangout notifications</v-subheader>
-
-      <v-list-item-group
-        multiple
-      >
-        <v-list-item>
-          <template v-slot:default="{ active, }">
+    <v-text-field
+      v-model="newTaskTitle"
+      @click:append="addTask"
+      @keyup="addTask"
+      class="pa-3"
+      outlined
+      label="Wassup?"
+      append-icon="mdi-plus"
+      hide-details
+      clearable
+    ></v-text-field>
+    <v-list class="pt-0" flat>
+      <div v-for="task in tasks" :key="task.id">
+        <v-list-item
+          @click="doneTask(task.id)"
+          :class="{ 'pink lighten-5': task.done }"
+        >
+          <template v-slot:default>
             <v-list-item-action>
-              <v-checkbox
-                :input-value="active"
-                color="primary"
-              ></v-checkbox>
+              <v-checkbox :input-value="task.done" color="primary"></v-checkbox>
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>Notifications</v-list-item-title>
-              <v-list-item-subtitle>Allow notifications</v-list-item-subtitle>
-            </v-list-item-content>
-          </template>
-        </v-list-item>
-
-        <v-list-item>
-          <template v-slot:default="{ active }">
+              <v-list-item-title
+                :class="{ 'text-decoration-line-through': (task.done = true) }"
+                >{{ task.title }}</v-list-item-title
+              ></v-list-item-content
+            >
             <v-list-item-action>
-              <v-checkbox
-                :input-value="active"
-                color="primary"
-              ></v-checkbox>
+              <v-btn @click.stop="deleteTask(task.id)" icon>
+                <v-icon color="primary">mdi-delete</v-icon>
+              </v-btn>
             </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title>Sound</v-list-item-title>
-              <v-list-item-subtitle>Hangouts message</v-list-item-subtitle>
-            </v-list-item-content>
           </template>
         </v-list-item>
-
-        <v-list-item>
-          <template v-slot:default="{ active }">
-            <v-list-item-action>
-              <v-checkbox
-                :input-value="active"
-                color="primary"
-              ></v-checkbox>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title>Video sounds</v-list-item-title>
-              <v-list-item-subtitle>Hangouts video call</v-list-item-subtitle>
-            </v-list-item-content>
-          </template>
-        </v-list-item>
-
-        <v-list-item>
-          <template v-slot:default="{ active }">
-            <v-list-item-action>
-              <v-checkbox
-                :input-value="active"
-                color="primary"
-              ></v-checkbox>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title>Invites</v-list-item-title>
-              <v-list-item-subtitle>Notify when receiving invites</v-list-item-subtitle>
-            </v-list-item-content>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
+        <v-divider></v-divider>
+      </div>
     </v-list>
-        </div>
+  </div>
 </template>
+<script>
+export default {
+  name: "Home",
+  data() {
+    return {
+      newTaskTitle: "",
+      tasks: [{ id: 1, title: "gesrr", done: "false" }],
+    };
+  },
+  methods: {
+    addTask() {
+      let newTask = {
+        id: Date.now(),
+        title: this.newTaskTitle,
+        done: "false",
+      };
+      this.tasks.push(newTask), (this.newTaskTitle = "");
+    },
+    doneTask(id) {
+      let task = this.tasks.filter((task) => task.id === id)[0];
+      task.done != task.done;
+    },
+    deleteTask(id) {
+      this.tasks = this.tasks.filter((task) => task.id !== id);
+    },
+  },
+};
+</script>

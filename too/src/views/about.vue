@@ -1,5 +1,5 @@
 <template>
-  <div class="about pa-6">
+  <div class="about pa-8">
     <h1>
       About TODO
     </h1>
@@ -15,6 +15,12 @@
       for, so you can make progress on the things that are important to you.
     </p>
     <br />
+    <v-card
+    :loading="loading"
+    class="mx-auto my-12 pt-4"
+    max-width="374"
+   
+  >
     <li>Start each day feeling calm and in control</li>
     <br />
     <li>Focus your energy on the right things</li>
@@ -25,5 +31,6 @@
     <br>
     <li>See tangible progress</li>
     <br>
+    </v-card>
   </div>
 </template>
