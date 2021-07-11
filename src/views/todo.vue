@@ -8,7 +8,6 @@
     <v-text-field
       v-model="newTaskTitle"
       @click:append="addTask"
-      @keyup="addTask"
       class="pa-3"
       outlined
       label="Wassup?"
@@ -24,12 +23,12 @@
         >
           <template v-slot:default>
             <v-list-item-action>
-              <v-checkbox :input-value="task.done" color="primary"></v-checkbox>
+              <v-checkbox v-model="task.done" color="primary"></v-checkbox>
             </v-list-item-action>
 
             <v-list-item-content>
               <v-list-item-title
-                :class="{ 'text-decoration-line-through': (task.done = true) }"
+                :class="{ 'text-decoration-line-through': (task.done == true) }"
                 >{{ task.title }}</v-list-item-title
               ></v-list-item-content
             >
@@ -51,7 +50,7 @@ export default {
   data() {
     return {
       newTaskTitle: "",
-      tasks: [{ id: 1, title: "gesrr", done: "false" }],
+      tasks: [{ id: 1, title: "Task 1", done: false }],
     };
   },
   methods: {
@@ -59,13 +58,15 @@ export default {
       let newTask = {
         id: Date.now(),
         title: this.newTaskTitle,
-        done: "false",
+        done: false,
       };
-      this.tasks.push(newTask), (this.newTaskTitle = "");
+      this.tasks.push(newTask);
+      this.newTaskTitle = "";
     },
+
     doneTask(id) {
       let task = this.tasks.filter((task) => task.id === id)[0];
-      task.done != task.done;
+      task.done = !task.done;
     },
     deleteTask(id) {
       this.tasks = this.tasks.filter((task) => task.id !== id);
